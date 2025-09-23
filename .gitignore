@@ -1,0 +1,72 @@
+## Build results
+bin/
+obj/
+out/
+
+## User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## VS Code
+.vscode/
+
+## Visual Studio
+.vs/
+*.dbmdl
+*.pdb
+*.cache
+*.log
+*.vspscc
+*.vssscc
+*.scc
+
+## ASP.NET temporary files
+**/App_Data/
+**/App_Start/
+**/App_Code/
+
+## NuGet packages
+*.nupkg
+packages/
+*.snupkg
+
+## Entity Framework
+Migrations/
+
+## Configuration
+appsettings.*.json
+
+## Publish
+publish/
+*.Publish.xml
+
+## Others
+*.DS_Store
+Thumbs.db
+*.bak
+*.tmp
+*.swp
+
+## Logs
+*.log
+
+## Test results
+TestResults/
+*.trx
+
+## Compiled DLLs
+*.dll
+*.exe
+
+## Rider
+.idea/
+
+## Coverage
+coverage/
+*.coverage
+*.coveragexml
+
+## Ignore secrets
+secrets.json
