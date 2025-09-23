@@ -1,4 +1,29 @@
+using Microsoft.EntityFrameworkCore;
+using PruebaTecnicaBank.Core.Interfaces;
+using PruebaTecnicaBank.Core.Services;
+using PruebaTecnicaBank.Infrastructure.Mappings;
+using PruebaTecnicaBank.Infrastructure.Repositories;
+using PruebaTecnicaBank.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+// DbContext con SQLite
+builder.Services.AddDbContext<BankDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Repositorios
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+
+// Servicios
+builder.Services.AddScoped<IClientService, ClientService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+
+// AutoMapper
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
