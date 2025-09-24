@@ -39,7 +39,7 @@ public class ClienteServicioTests
         // Arrange
         var clienteDto = new ClienteCrearDto
         {
-            Nombre = "Juan Pérez",
+            Nombre = "Juan",
             FechaNacimiento = new DateTime(1990, 5, 15),
             Sexo = "Masculino",
             Ingresos = 50000m
@@ -48,7 +48,7 @@ public class ClienteServicioTests
         var clienteCreado = new Cliente
         {
             Id = Guid.NewGuid(),
-            Nombre = "Juan Pérez",
+            Nombre = "Juan",
             FechaNacimiento = new DateTime(1990, 5, 15),
             Sexo = Sexo.Masculino,
             Ingresos = 50000m
@@ -62,7 +62,7 @@ public class ClienteServicioTests
 
         // Assert
         Assert.NotNull(resultado);
-        Assert.Equal("Juan Pérez", resultado.Nombre);
+        Assert.Equal("Juan", resultado.Nombre);
         Assert.Equal(new DateTime(1990, 5, 15), resultado.FechaNacimiento);
         Assert.Equal("Masculino", resultado.Sexo);
         Assert.Equal(50000m, resultado.Ingresos);
@@ -79,7 +79,7 @@ public class ClienteServicioTests
         // Arrange
         var clienteDto = new ClienteCrearDto
         {
-            Nombre = "María García",
+            Nombre = "Maria",
             FechaNacimiento = new DateTime(1995, 8, 22),
             Sexo = "Femenino",
             Ingresos = 75000m
@@ -88,7 +88,7 @@ public class ClienteServicioTests
         var clienteCreado = new Cliente
         {
             Id = Guid.NewGuid(),
-            Nombre = "María García",
+            Nombre = "Maria",
             FechaNacimiento = new DateTime(1995, 8, 22),
             Sexo = Sexo.Femenino,
             Ingresos = 75000m
@@ -102,7 +102,7 @@ public class ClienteServicioTests
 
         // Assert
         Assert.NotNull(resultado);
-        Assert.Equal("María García", resultado.Nombre);
+        Assert.Equal("Maria", resultado.Nombre);
         Assert.Equal(new DateTime(1995, 8, 22), resultado.FechaNacimiento);
         Assert.Equal("Femenino", resultado.Sexo);
         Assert.Equal(75000m, resultado.Ingresos);
@@ -119,7 +119,7 @@ public class ClienteServicioTests
         // Arrange
         var clienteDto = new ClienteCrearDto
         {
-            Nombre = "Pedro López",
+            Nombre = "Pedro",
             FechaNacimiento = new DateTime(1988, 3, 10),
             Sexo = "Masculino",
             Ingresos = 1m
@@ -128,7 +128,7 @@ public class ClienteServicioTests
         var clienteCreado = new Cliente
         {
             Id = Guid.NewGuid(),
-            Nombre = "Pedro López",
+            Nombre = "Pedro",
             FechaNacimiento = new DateTime(1988, 3, 10),
             Sexo = Sexo.Masculino,
             Ingresos = 1m
@@ -142,7 +142,7 @@ public class ClienteServicioTests
 
         // Assert
         Assert.NotNull(resultado);
-        Assert.Equal("Pedro López", resultado.Nombre);
+        Assert.Equal("Pedro", resultado.Nombre);
         Assert.Equal(1m, resultado.Ingresos);
         _mockClienteRepo.Verify(x => x.AgregarAsync(It.IsAny<Cliente>()), Times.Once);
     }
@@ -162,7 +162,7 @@ public class ClienteServicioTests
         var cliente = new Cliente
         {
             Id = clienteId,
-            Nombre = "Ana Martínez",
+            Nombre = "Ana",
             FechaNacimiento = new DateTime(1992, 7, 18),
             Sexo = Sexo.Femenino,
             Ingresos = 60000m
@@ -177,7 +177,7 @@ public class ClienteServicioTests
         // Assert
         Assert.NotNull(resultado);
         Assert.Equal(clienteId, resultado.Id);
-        Assert.Equal("Ana Martínez", resultado.Nombre);
+        Assert.Equal("Ana", resultado.Nombre);
         Assert.Equal("Femenino", resultado.Sexo);
         _mockClienteRepo.Verify(x => x.ObtenerPorIdAsync(clienteId), Times.Once);
     }
@@ -213,7 +213,7 @@ public class ClienteServicioTests
         var cliente = new Cliente
         {
             Id = clienteId,
-            Nombre = "Carlos Rodríguez",
+            Nombre = "Carlos",
             FechaNacimiento = new DateTime(1985, 12, 5),
             Sexo = Sexo.Masculino,
             Ingresos = 80000m,
