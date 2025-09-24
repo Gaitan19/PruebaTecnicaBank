@@ -60,6 +60,7 @@ Thumbs.db
 ## Test results
 TestResults/
 *.trx
+**/coverage.info
 
 ## Compiled DLLs
 *.dll

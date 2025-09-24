@@ -48,5 +48,13 @@ namespace PruebaTecnicaBank.Core.Interfaces
         /// <param name="numeroCuenta">Número de la cuenta bancaria.</param>
         /// <returns>Un objeto que contiene las transacciones de la cuenta y el saldo final.</returns>
         Task<HistorialTransaccionesDto> ObtenerTransaccionesAsync(string numeroCuenta);
+
+        /// <summary>
+        /// Aplica intereses al saldo de una cuenta bancaria.
+        /// </summary>
+        /// <param name="numeroCuenta">Número de la cuenta bancaria.</param>
+        /// <param name="tasaInteres">Tasa de interés a aplicar (por ejemplo, 0.02 para 2%).</param>
+        /// <returns>Un objeto que representa la respuesta de la transacción de interés aplicado.</returns>
+        Task<TransaccionRespuestaDto> AplicarInteresAsync(string numeroCuenta, decimal tasaInteres);
     }
 }

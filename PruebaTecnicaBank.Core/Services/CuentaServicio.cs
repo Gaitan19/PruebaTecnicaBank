@@ -161,5 +161,38 @@ namespace PruebaTecnicaBank.Core.Services
                 SaldoFinal = cuenta.Saldo
             };
         }
+
+        /// <summary>
+        /// Aplica intereses al saldo de una cuenta bancaria.
+        /// </summary>
+        /// <param name="numeroCuenta">Número de la cuenta.</param>
+        /// <param name="tasaInteres">Tasa de interés a aplicar.</param>
+        /// <returns>Detalles de la transacción de interés aplicado.</returns>
+        /// <exception cref="Exception">Lanza una excepción si la cuenta no existe o la tasa de interés es inválida.</exception>
+        public async Task<TransaccionRespuestaDto> AplicarInteresAsync(string numeroCuenta, decimal tasaInteres)
+        {
+            var cuenta = await _cuentaRepo.ObtenerPorNumeroAsync(numeroCuenta);
+            if (cuenta == null) throw new Exception("Cuenta no encontrada");
+
+            if (tasaInteres <= 0) throw new Exception("La tasa de interes tiene que ser mayor a 0");
+
+            var montoInteres = cuenta.Saldo * tasaInteres;
+            cuenta.Saldo += montoInteres;
+
+            var transaccion = new Transaccion
+            {
+                Id = Guid.NewGuid(),
+                CuentaId = cuenta.Id,
+                Tipo = TipoTransaccion.Interes,
+                Monto = montoInteres,
+                SaldoDespues = cuenta.Saldo,
+                FechaHora = DateTime.UtcNow
+            };
+
+            await _transaccionRepo.AgregarAsync(transaccion);
+            await _cuentaRepo.ActualizarAsync(cuenta);
+
+            return _mapper.Map<TransaccionRespuestaDto>(transaccion);
+        }
     }
 }

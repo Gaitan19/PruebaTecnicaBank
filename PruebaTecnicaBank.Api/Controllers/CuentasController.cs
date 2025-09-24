@@ -126,5 +126,25 @@ namespace PruebaTecnicaBank.Api.Controllers
                 return NotFound(new { message = ex.Message });
             }
         }
+
+        /// <summary>
+        /// Aplica intereses a una cuenta bancaria.
+        /// </summary>
+        /// <param name="numeroCuenta">Número de la cuenta.</param>
+        /// <param name="tasaInteres">Tasa de interés a aplicar (por ejemplo, 0.02 para 2%).</param>
+        /// <returns>Detalles de la transacción de interés aplicado.</returns>
+        [HttpPost("aplicar-interes/{numeroCuenta}")]
+        public async Task<ActionResult<TransaccionRespuestaDto>> AplicarInteres(string numeroCuenta, [FromBody] decimal tasaInteres)
+        {
+            try
+            {
+                var transaccion = await _cuentaServicio.AplicarInteresAsync(numeroCuenta, tasaInteres);
+                return Ok(transaccion);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
     }
 }
