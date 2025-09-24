@@ -183,7 +183,7 @@ Microsoft (R) Test Execution Command Line Tool
 
 Starting test execution, please wait...
 
-Passed!  - Failed:     0, Passed:    31, Skipped:     0, Total:    31, Duration: < 1s
+Passed!  - Failed:     0, Passed:    24, Skipped:     0, Total:    24, Duration: < 1s
 ```
 
 ### 🛠️ Tecnologías de Pruebas Utilizadas
@@ -208,21 +208,3 @@ dotnet run
 - `CuentaServicioTests.cs` - Pruebas para el servicio de cuentas bancarias
 - `ClienteServicioTests.cs` - Pruebas para el servicio de clientes
 
-### ✅ Verificación Rápida
-
-Para verificar que todo funciona correctamente:
-
-```bash
-# 1. Compilar
-dotnet build
-
-# 2. Ejecutar pruebas
-dotnet test
-
-# 3. Ejecutar pruebas con cobertura detallada
-dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov
-
-# 4. Si todo está bien, deberías ver algo como:
-# Passed!  - Failed: 0, Passed: 31, Skipped: 0, Total: 31
-# + tabla de cobertura con porcentajes por módulo
-```
