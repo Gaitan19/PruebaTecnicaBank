@@ -384,7 +384,7 @@ public class CuentaServicioTests
         // Act & Assert
         var exception = await Assert.ThrowsAsync<Exception>(
             () => _cuentaServicio.AplicarInteresAsync(numeroCuenta, tasaInteres));
-        Assert.Equal("La tasa de interés no puede ser negativa", exception.Message);
+        Assert.Equal("La tasa de interes tiene que ser mayor a 0", exception.Message);
     }
 
     /// <summary>
