@@ -3,8 +3,8 @@ using PruebaTecnicaBank.Core.Interfaces;
 using PruebaTecnicaBank.Core.Services;
 using PruebaTecnicaBank.Infrastructure.Mappings;
 using PruebaTecnicaBank.Infrastructure.Repositories;
-using PruebaTecnicaBank.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
+using PruebaTecnicaBank.Infrastructure.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 

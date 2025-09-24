@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PruebaTecnicaBank.Core.Entities;
 using PruebaTecnicaBank.Core.Interfaces;
+using PruebaTecnicaBank.Infrastructure.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +17,6 @@ namespace PruebaTecnicaBank.Infrastructure.Repositories
     {
         private readonly BankDbContext _context;
 
-        /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="ClienteRepositorio"/>.
-        /// </summary>
-        /// <param name="context">El contexto de la base de datos.</param>
         public ClienteRepositorio(BankDbContext context) => _context = context;
 
         /// <summary>

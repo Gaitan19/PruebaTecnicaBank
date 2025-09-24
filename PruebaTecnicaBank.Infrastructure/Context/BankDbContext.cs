@@ -6,14 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PruebaTecnicaBank.Infrastructure
+namespace PruebaTecnicaBank.Infrastructure.Context
 {
     /// <summary>
     /// Contexto de la base de datos para la aplicación bancaria.
     /// </summary>
     public class BankDbContext : DbContext
     {
-       
+
         public BankDbContext(DbContextOptions<BankDbContext> options) : base(options) { }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace PruebaTecnicaBank.Infrastructure
                 entity.Property(e => e.NumeroCuenta).HasColumnName("AccountNumber");
                 entity.Property(e => e.Saldo).HasColumnName("Balance");
                 entity.Property(e => e.ClienteId).HasColumnName("ClientId");
-                
+
                 entity.HasIndex(a => a.NumeroCuenta).IsUnique();
                 entity.HasOne(a => a.Cliente)
                     .WithMany(c => c.Cuentas)
@@ -67,7 +67,7 @@ namespace PruebaTecnicaBank.Infrastructure
                 entity.Property(e => e.Monto).HasColumnName("Amount");
                 entity.Property(e => e.SaldoDespues).HasColumnName("BalanceAfter");
                 entity.Property(e => e.FechaHora).HasColumnName("Timestamp");
-                
+
                 entity.HasOne(t => t.Cuenta)
                     .WithMany(a => a.Transacciones)
                     .HasForeignKey(t => t.CuentaId);

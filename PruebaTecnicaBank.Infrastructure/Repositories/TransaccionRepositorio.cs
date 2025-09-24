@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PruebaTecnicaBank.Infrastructure.Context;
 
 namespace PruebaTecnicaBank.Infrastructure.Repositories
 {
@@ -16,10 +17,6 @@ namespace PruebaTecnicaBank.Infrastructure.Repositories
     {
         private readonly BankDbContext _context;
 
-        /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="TransaccionRepositorio"/>.
-        /// </summary>
-        /// <param name="context">El contexto de la base de datos.</param>
         public TransaccionRepositorio(BankDbContext context) => _context = context;
 
         /// <summary>
