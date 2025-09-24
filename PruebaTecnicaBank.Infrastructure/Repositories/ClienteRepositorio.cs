@@ -12,26 +12,26 @@ namespace PruebaTecnicaBank.Infrastructure.Repositories
     /// <summary>
     /// Repositorio para gestionar operaciones relacionadas con los clientes.
     /// </summary>
-    public class ClientRepository : IClientRepository
+    public class ClienteRepositorio : IClienteRepositorio
     {
         private readonly BankDbContext _context;
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="ClientRepository"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="ClienteRepositorio"/>.
         /// </summary>
         /// <param name="context">El contexto de la base de datos.</param>
-        public ClientRepository(BankDbContext context) => _context = context;
+        public ClienteRepositorio(BankDbContext context) => _context = context;
 
         /// <summary>
         /// Agrega un nuevo cliente a la base de datos.
         /// </summary>
-        /// <param name="client">El cliente a agregar.</param>
+        /// <param name="cliente">El cliente a agregar.</param>
         /// <returns>El cliente agregado.</returns>
-        public async Task<Client> AddAsync(Client client)
+        public async Task<Cliente> AgregarAsync(Cliente cliente)
         {
-            _context.Clients.Add(client);
+            _context.Clients.Add(cliente);
             await _context.SaveChangesAsync();
-            return client;
+            return cliente;
         }
 
         /// <summary>
@@ -39,14 +39,14 @@ namespace PruebaTecnicaBank.Infrastructure.Repositories
         /// </summary>
         /// <param name="id">El identificador del cliente.</param>
         /// <returns>El cliente correspondiente o null si no se encuentra.</returns>
-        public async Task<Client?> GetByIdAsync(Guid id) =>
-            await _context.Clients.Include(c => c.Accounts).FirstOrDefaultAsync(c => c.Id == id);
+        public async Task<Cliente?> ObtenerPorIdAsync(Guid id) =>
+            await _context.Clients.Include(c => c.Cuentas).FirstOrDefaultAsync(c => c.Id == id);
 
         /// <summary>
         /// Obtiene todos los clientes de la base de datos.
         /// </summary>
         /// <returns>Una lista de todos los clientes.</returns>
-        public async Task<IEnumerable<Client>> GetAllAsync() =>
-            await _context.Clients.AsNoTracking().ToListAsync();
+        public async Task<IEnumerable<Cliente>> ObtenerTodosAsync() =>
+            await _context.Clients.Include(c => c.Cuentas).AsNoTracking().ToListAsync();
     }
 }

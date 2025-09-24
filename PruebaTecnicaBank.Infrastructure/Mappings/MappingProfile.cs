@@ -21,22 +21,24 @@ namespace PruebaTecnicaBank.Infrastructure.Mappings
         public MappingProfile()
         {
             // Mapeo para Cliente
-            CreateMap<ClientCreateDto, Client>()
-                .ForMember(dest => dest.Id, opt => opt.Ignore()); // Ignorar el Id al crear un cliente
+            CreateMap<ClienteCrearDto, Cliente>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore()) // Ignorar el Id al crear un cliente
+                .ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => Enum.Parse<Sexo>(src.Sexo))); // Convertir string a enum
 
-            CreateMap<Client, ClientResponseDto>(); // Mapeo de Cliente a ClienteResponseDto
+            CreateMap<Cliente, ClienteRespuestaDto>()
+                .ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => src.Sexo.ToString())); // Convertir enum a string
 
             // Mapeo para Cuenta
-            CreateMap<AccountCreateDto, Account>()
+            CreateMap<CuentaCrearDto, Cuenta>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore()) // Ignorar el Id al crear una cuenta
-                .ForMember(dest => dest.AccountNumber, opt => opt.Ignore()) // Ignorar el número de cuenta
-                .ForMember(dest => dest.Balance, opt => opt.MapFrom(src => src.InitialBalance)); // Asignar el saldo inicial
+                .ForMember(dest => dest.NumeroCuenta, opt => opt.Ignore()) // Ignorar el número de cuenta (se asignará manualmente)
+                .ForMember(dest => dest.Saldo, opt => opt.MapFrom(src => src.SaldoInicial)); // Asignar el saldo inicial
 
-            CreateMap<Account, AccountResponseDto>(); // Mapeo de Cuenta a AccountResponseDto
+            CreateMap<Cuenta, CuentaRespuestaDto>(); // Mapeo de Cuenta a CuentaRespuestaDto
 
             // Mapeo para Transacción
-            CreateMap<Transaction, TransactionResponseDto>()
-                .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.Type.ToString())); // Convertir el tipo de transacción a string
+            CreateMap<Transaccion, TransaccionRespuestaDto>()
+                .ForMember(dest => dest.Tipo, opt => opt.MapFrom(src => src.Tipo.ToString())); // Convertir el tipo de transacción a string
         }
     }
 }

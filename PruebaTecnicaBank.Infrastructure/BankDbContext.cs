@@ -19,17 +19,17 @@ namespace PruebaTecnicaBank.Infrastructure
         /// <summary>
         /// Conjunto de entidades de clientes.
         /// </summary>
-        public DbSet<Client> Clients { get; set; }
+        public DbSet<Cliente> Clients { get; set; }
 
         /// <summary>
         /// Conjunto de entidades de cuentas.
         /// </summary>
-        public DbSet<Account> Accounts { get; set; }
+        public DbSet<Cuenta> Accounts { get; set; }
 
         /// <summary>
         /// Conjunto de entidades de transacciones.
         /// </summary>
-        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Transaccion> Transactions { get; set; }
 
         /// <summary>
         /// Configura el modelo de la base de datos.
@@ -37,19 +37,41 @@ namespace PruebaTecnicaBank.Infrastructure
         /// <param name="modelBuilder">Constructor del modelo.</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Account>()
-                .HasIndex(a => a.AccountNumber)
-                .IsUnique();
+            // Configurar Cliente
+            modelBuilder.Entity<Cliente>(entity =>
+            {
+                entity.Property(e => e.Nombre).HasColumnName("Name");
+                entity.Property(e => e.FechaNacimiento).HasColumnName("BirthDate");
+                entity.Property(e => e.Sexo).HasColumnName("Sex");
+                entity.Property(e => e.Ingresos).HasColumnName("Income");
+            });
 
-            modelBuilder.Entity<Client>()
-                .HasMany(c => c.Accounts)
-                .WithOne(a => a.Client)
-                .HasForeignKey(a => a.ClientId);
+            // Configurar Cuenta
+            modelBuilder.Entity<Cuenta>(entity =>
+            {
+                entity.Property(e => e.NumeroCuenta).HasColumnName("AccountNumber");
+                entity.Property(e => e.Saldo).HasColumnName("Balance");
+                entity.Property(e => e.ClienteId).HasColumnName("ClientId");
+                
+                entity.HasIndex(a => a.NumeroCuenta).IsUnique();
+                entity.HasOne(a => a.Cliente)
+                    .WithMany(c => c.Cuentas)
+                    .HasForeignKey(a => a.ClienteId);
+            });
 
-            modelBuilder.Entity<Account>()
-                .HasMany(a => a.Transactions)
-                .WithOne(t => t.Account)
-                .HasForeignKey(t => t.AccountId);
+            // Configurar Transacción
+            modelBuilder.Entity<Transaccion>(entity =>
+            {
+                entity.Property(e => e.CuentaId).HasColumnName("AccountId");
+                entity.Property(e => e.Tipo).HasColumnName("Type");
+                entity.Property(e => e.Monto).HasColumnName("Amount");
+                entity.Property(e => e.SaldoDespues).HasColumnName("BalanceAfter");
+                entity.Property(e => e.FechaHora).HasColumnName("Timestamp");
+                
+                entity.HasOne(t => t.Cuenta)
+                    .WithMany(a => a.Transacciones)
+                    .HasForeignKey(t => t.CuentaId);
+            });
         }
     }
 }

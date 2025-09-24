@@ -35,6 +35,11 @@ packages/
 ## Entity Framework
 Migrations/
 
+## SQLite database files
+*.db
+*.db-shm
+*.db-wal
+
 ## Configuration
 appsettings.*.json
 

@@ -12,37 +12,37 @@ namespace PruebaTecnicaBank.Infrastructure.Repositories
     /// <summary>
     /// Repositorio para manejar las transacciones en la base de datos.
     /// </summary>
-    public class TransactionRepository : ITransactionRepository
+    public class TransaccionRepositorio : ITransaccionRepositorio
     {
         private readonly BankDbContext _context;
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="TransactionRepository"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="TransaccionRepositorio"/>.
         /// </summary>
         /// <param name="context">El contexto de la base de datos.</param>
-        public TransactionRepository(BankDbContext context) => _context = context;
+        public TransaccionRepositorio(BankDbContext context) => _context = context;
 
         /// <summary>
         /// Agrega una nueva transacción a la base de datos.
         /// </summary>
-        /// <param name="transaction">La transacción a agregar.</param>
+        /// <param name="transaccion">La transacción a agregar.</param>
         /// <returns>La transacción agregada.</returns>
-        public async Task<Transaction> AddAsync(Transaction transaction)
+        public async Task<Transaccion> AgregarAsync(Transaccion transaccion)
         {
-            _context.Transactions.Add(transaction);
+            _context.Transactions.Add(transaccion);
             await _context.SaveChangesAsync();
-            return transaction;
+            return transaccion;
         }
 
         /// <summary>
         /// Obtiene las transacciones asociadas a una cuenta específica.
         /// </summary>
-        /// <param name="accountId">El identificador de la cuenta.</param>
+        /// <param name="cuentaId">El identificador de la cuenta.</param>
         /// <returns>Una lista de transacciones.</returns>
-        public async Task<IEnumerable<Transaction>> GetByAccountAsync(Guid accountId) =>
+        public async Task<IEnumerable<Transaccion>> ObtenerPorCuentaAsync(Guid cuentaId) =>
             await _context.Transactions
-                .Where(t => t.AccountId == accountId)
-                .OrderBy(t => t.Timestamp)
+                .Where(t => t.CuentaId == cuentaId)
+                .OrderBy(t => t.FechaHora)
                 .ToListAsync();
     }
 }

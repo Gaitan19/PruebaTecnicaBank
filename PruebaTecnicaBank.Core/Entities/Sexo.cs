@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace PruebaTecnicaBank.Core.Entities
 {
-    public enum TransactionType
+    public enum Sexo
     {
-        Deposit = 0,
-        Withdrawal = 1,
-        Interest = 2
+        Masculino = 0,
+        Femenino = 1,
     }
 }
