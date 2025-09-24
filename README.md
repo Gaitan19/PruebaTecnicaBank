@@ -53,9 +53,8 @@ dotnet run
 ```
 
 **La API estará disponible en:**
-- HTTP: `http://localhost:5000`
-- HTTPS: `https://localhost:5001` 
-- Swagger UI: `https://localhost:5001/swagger`
+
+- Swagger UI: `/swagger`
 
 ## Requisitos Previos
 
@@ -151,49 +150,6 @@ Este comando genera una tabla detallada con porcentajes de cobertura enfocada so
 +---------+--------+--------+--------+
 ```
 
-**Nota:** La configuración excluye automáticamente `PruebaTecnicaBank.Infrastructure` del análisis de cobertura ya que no estamos probando la capa de infraestructura, solo los servicios del dominio.
-
-#### Otras opciones de cobertura:
-```bash
-# Cobertura básica (genera archivo XML)
-dotnet test --collect:"XPlat Code Coverage"
-
-# Múltiples formatos
-dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat="lcov,opencover,cobertura"
-
-# Solo mostrar resumen
-dotnet test /p:CollectCoverage=true
-```
-
-### 📊 Cobertura de Pruebas
-
-#### ClienteServicio (13 pruebas)
-- ✅ **Creación de clientes:** 4 pruebas
-  - Datos válidos masculino/femenino
-  - Ingresos mínimos
-  - Nombres largos
-- ✅ **Obtención de cliente:** 3 pruebas
-  - Cliente existente
-  - Cliente no existente
-  - Cliente con cuentas asociadas
-- ✅ **Obtención de todos los clientes:** 3 pruebas
-  - Lista con clientes
-  - Lista vacía
-  - Clientes con diferentes sexos
-- ✅ **Casos extremos:** 3 pruebas
-  - Fechas antiguas
-  - Ingresos máximos
-  - GUID vacío
-
-#### CuentaServicio (18 pruebas)
-- ✅ **Creación de cuentas:** 3 pruebas
-- ✅ **Operaciones de depósito:** 3 pruebas
-- ✅ **Operaciones de retiro:** 3 pruebas
-- ✅ **Aplicación de intereses:** 3 pruebas
-- ✅ **Consulta de saldo:** 2 pruebas
-- ✅ **Historial de transacciones:** 2 pruebas
-- ✅ **Casos extremos:** 3 pruebas
-
 ### 🎯 Ejemplo de Salida Esperada
 
 ```
@@ -213,15 +169,6 @@ Passed!  - Failed:     0, Passed:    31, Skipped:     0, Total:    31, Duration:
 - **Microsoft.EntityFrameworkCore.InMemory:** Base de datos en memoria para pruebas
 - **Coverlet:** Herramienta de cobertura de código multiplataforma para .NET
 
-### 📝 Convenciones de Nomenclatura de Pruebas
-
-Las pruebas siguen la convención: `[Método]_[Escenario]_[ResultadoEsperado]`
-
-Ejemplos:
-- `CrearClienteAsync_DatosValidos_RetornaClienteCreado`
-- `DepositarAsync_CuentaNoExiste_LanzaExcepcion`
-- `ObtenerClienteAsync_ClienteExiste_RetornaCliente`
-
 ### 🚀 Ejecución de la API
 
 Para ejecutar la API web:
@@ -230,11 +177,6 @@ Para ejecutar la API web:
 cd PruebaTecnicaBank.Api
 dotnet run
 ```
-
-La API estará disponible en:
-- HTTP: `http://localhost:5000`
-- HTTPS: `https://localhost:5001`
-- Swagger UI: `https://localhost:5001/swagger`
 
 ### 📁 Archivos de Pruebas
 
