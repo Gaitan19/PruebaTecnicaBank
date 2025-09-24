@@ -60,6 +60,10 @@ dotnet run
 
 - [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 - Visual Studio 2022 / Visual Studio Code / JetBrains Rider (opcional)
+- **Entity Framework Tools** (instalar si no está disponible):
+  ```bash
+  dotnet tool install --global dotnet-ef
+  ```
 
 ## Instalación
 
@@ -78,6 +82,27 @@ dotnet run
    ```bash
    dotnet build
    ```
+
+## 🗄️ Gestión de Base de Datos y Migraciones
+
+Este proyecto utiliza **Entity Framework Core** con **SQLite** para el manejo de la base de datos. A continuación se detallan los comandos para crear y gestionar migraciones.
+
+### Comandos para Migraciones
+
+#### 1. Crear la migración inicial
+```bash
+dotnet ef migrations add InitialCreate --project PruebaTecnicaBank.Infrastructure --startup-project PruebaTecnicaBank.Api
+```
+
+#### 2. Agregar nuevas migraciones (después de cambios en el modelo)
+```bash
+dotnet ef migrations add NombreDeLaMigracion --project PruebaTecnicaBank.Infrastructure --startup-project PruebaTecnicaBank.Api
+```
+
+#### 3. Actualizar la base de datos
+```bash
+dotnet ef database update --project PruebaTecnicaBank.Infrastructure --startup-project PruebaTecnicaBank.Api
+```
 
 ## Ejecución de Pruebas Unitarias
 

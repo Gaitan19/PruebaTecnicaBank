@@ -32,9 +32,6 @@ out/
 packages/
 *.snupkg
 
-## Entity Framework
-Migrations/
-
 ## SQLite database files
 *.db
 *.db-shm
